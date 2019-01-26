@@ -1,22 +1,51 @@
 export default {
   items: [
     {
-      name: 'Dashboard',
+      name: 'Home',
       url: '/dashboard',
-      icon: 'icon-speedometer',
-      badge: {
-        variant: 'info',
-        text: 'NEW',
-      },
+      icon: 'cui-home',
+      // badge: {
+      //   variant: 'info',
+      //   text: 'NEW',
+      // },
+    },
+    // {
+    //   title: true,
+    //   name: 'Theme',
+    //   wrapper: {            // optional wrapper object
+    //     element: '',        // required valid HTML5 element tag
+    //     attributes: {}        // optional valid JS object with JS API naming ex: { className: "my-class", style: { fontFamily: "Verdana" }, id: "my-id"}
+    //   },
+    //   class: ''             // optional class names space delimited list for title item ex: "text-center"
+    // },
+    {
+      name: 'Tra cứu văn bản',
+      url: '#',
+      icon: 'cui-file',
+    },
+    {
+      name: 'Kho tài liệu',
+      url: '#',
+      icon: 'cui-layers',
+    },
+    {
+      name: 'Đánh giá theo TT 20',
+      url: '#',
+      icon: 'cui-pencil',
+    },
+    {
+      name: 'Thành viên',
+      url: '/users',
+      icon: 'cui-people',
+    },
+    {
+      name: 'Giới thiệu',
+      url: '#',
+      icon: 'cui-globe',
     },
     {
       title: true,
-      name: 'Theme',
-      wrapper: {            // optional wrapper object
-        element: '',        // required valid HTML5 element tag
-        attributes: {}        // optional valid JS object with JS API naming ex: { className: "my-class", style: { fontFamily: "Verdana" }, id: "my-id"}
-      },
-      class: ''             // optional class names space delimited list for title item ex: "text-center"
+      name: 'Components',
     },
     {
       name: 'Colors',
@@ -28,14 +57,14 @@ export default {
       url: '/theme/typography',
       icon: 'icon-pencil',
     },
-    {
-      title: true,
-      name: 'Components',
-      wrapper: {
-        element: '',
-        attributes: {},
-      },
-    },
+    // {
+    //   title: true,
+    //   name: 'Components',
+    //   wrapper: {
+    //     element: '',
+    //     attributes: {},
+    //   },
+    // },
     {
       name: 'Base',
       url: '/base',
@@ -221,13 +250,13 @@ export default {
         text: 'NEW',
       },
     },
-    {
-      divider: true,
-    },
-    {
-      title: true,
-      name: 'Extras',
-    },
+    // {
+    //   divider: true,
+    // },
+    // {
+    //   title: true,
+    //   name: 'Extras',
+    // },
     {
       name: 'Pages',
       url: '/pages',
@@ -261,20 +290,20 @@ export default {
       icon: 'icon-ban',
       attributes: { disabled: true },
     },
-    {
-      name: 'Download CoreUI',
-      url: 'https://coreui.io/react/',
-      icon: 'icon-cloud-download',
-      class: 'mt-auto',
-      variant: 'success',
-      attributes: { target: '_blank', rel: "noopener" },
-    },
-    {
-      name: 'Try CoreUI PRO',
-      url: 'https://coreui.io/pro/react/',
-      icon: 'icon-layers',
-      variant: 'danger',
-      attributes: { target: '_blank', rel: "noopener" },
-    },
+    // {
+    //   name: 'Download CoreUI',
+    //   url: 'https://coreui.io/react/',
+    //   icon: 'icon-cloud-download',
+    //   class: 'mt-auto',
+    //   variant: 'success',
+    //   attributes: { target: '_blank', rel: "noopener" },
+    // },
+    // {
+    //   name: 'Try CoreUI PRO',
+    //   url: 'https://coreui.io/pro/react/',
+    //   icon: 'icon-layers',
+    //   variant: 'danger',
+    //   attributes: { target: '_blank', rel: "noopener" },
+    // },
   ],
 };
