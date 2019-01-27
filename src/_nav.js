@@ -1,7 +1,7 @@
 export default {
   items: [
     {
-      name: 'Home',
+      name: 'Trang chủ',
       url: '/dashboard',
       icon: 'cui-home',
 
