@@ -1,6 +1,5 @@
 import React from 'react';
 import DefaultLayout from './containers/DefaultLayout';
-import maintest from './views/MainTest/maintest';
 import Maintest from './views/MainTest/maintest';
 
 const Breadcrumbs = React.lazy(() => import('./views/Base/Breadcrumbs'));
@@ -38,6 +37,7 @@ const Typography = React.lazy(() => import('./views/Theme/Typography'));
 const Widgets = React.lazy(() => import('./views/Widgets/Widgets'));
 const Users = React.lazy(() => import('./views/Users/Users'));
 const User = React.lazy(() => import('./views/Users/User'));
+
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [

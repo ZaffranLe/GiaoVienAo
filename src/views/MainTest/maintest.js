@@ -1,5 +1,6 @@
-import React, { Component} from 'react';
+import React, { Component } from 'react';
 import {
+    Badge,
     Card,
     CardBody,
     CardHeader,
@@ -8,6 +9,7 @@ import {
     Row,
     Table,
 } from 'reactstrap';
+
 
 
 class Maintest extends Component {
@@ -129,7 +131,7 @@ class Maintest extends Component {
                                 <h4>Văn bản mới nhất</h4>
                             </CardHeader>
                             <CardBody>
-                                <Table responsive className="text-center">
+                                <Table responsive striped className="text-center">
                                     <thead className="thead-light">
                                         <tr>
                                             <th> Location</th>
@@ -158,7 +160,7 @@ class Maintest extends Component {
                                 <h4>Tài liệu trong kho</h4>
                             </CardHeader>
                             <CardBody>
-                                <Table responsive className="text-center">
+                                <Table responsive striped className="text-center">
                                     <thead className="thead-light">
                                         <tr>
                                             <th> Tên tài liệu</th>
@@ -190,15 +192,26 @@ class Maintest extends Component {
                                 <h4>Kết quả tự đánh giá</h4>
                             </CardHeader>
                             <CardBody>
-                                <Table responsive className="text-center">
-
+                                <Table responsive striped className="text-center">
+                                    <thead className="thead-light">
+                                        <tr>
+                                            <th>Kỳ đánh giá</th>
+                                            <th>Xếp loại</th>
+                                        </tr>
+                                    </thead>
                                     <tbody>
                                         <tr >
                                             <td>adobe.com</td>
                                             <td>
-                                                <div className="media-icon mr-4">
-                                                    <i className="fa fa-music"></i>
-                                                </div>
+                                                <h5><Badge color="success">Tốt</Badge></h5>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                abc
+                                            </td>
+                                            <td>
+                                                <h5><Badge color="info">Đạt</Badge></h5>
                                             </td>
                                         </tr>
 
