@@ -11,9 +11,7 @@ import {
   Col,
   Row,
   Table,
-  Input,
-  InputGroup,
-  InputGroupAddon
+  Input
 } from "reactstrap";
 
 import usersData from "./UsersData";
@@ -84,7 +82,7 @@ class Users extends Component {
     e.preventDefault();
 
     this.setState({
-      txtSearch: e.target.value
+      txtSearch: e.target.value.toLowerCase()
     });
   }
 
@@ -106,27 +104,12 @@ class Users extends Component {
                     </big>
                   </Col>
                   <Col xl={4}>
-                    <InputGroup>
-                      <Input
-                        type="text"
-                        name="txtSearch"
-                        onChange={e => this.handleChangeTxtSearch(e)}
-                        placeholder="Nhập Họ Tên cần tìm kiếm"
-                      />
-                      <InputGroupAddon addonType="prepend">
-                        <Button
-                          type="button"
-                          color="primary"
-                          onClick={() => {
-                            userList.filter(
-                              user => user.name === this.state.txtSearch
-                            );
-                          }}
-                        >
-                          <i className="fa fa-search" /> Tìm kiếm
-                        </Button>
-                      </InputGroupAddon>
-                    </InputGroup>
+                    <Input
+                      type="text"
+                      name="txtSearch"
+                      onChange={e => this.handleChangeTxtSearch(e)}
+                      placeholder="Nhập Họ Tên cần tìm kiếm"
+                    />
                   </Col>
                 </Row>
               </CardHeader>
@@ -142,7 +125,7 @@ class Users extends Component {
                     </tr>
                   </thead>
                   <tbody>
-                    {this.state.txtSearch === ''
+                    {this.state.txtSearch === ""
                       ? userList
                           .slice(
                             currentPage * this.pageSize,
@@ -152,7 +135,11 @@ class Users extends Component {
                             <UserRow key={index} user={user} />
                           ))
                       : userList
-                          .filter(user => user.name.includes(this.state.txtSearch))
+                          .filter(user =>
+                            user.name
+                              .toLowerCase()
+                              .includes(this.state.txtSearch)
+                          )
                           .slice(
                             currentPage * this.pageSize,
                             (currentPage + 1) * this.pageSize
