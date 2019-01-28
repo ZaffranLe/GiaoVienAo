@@ -186,7 +186,7 @@ class User extends Component {
                             <Link to={userLink}>Kỳ 1 năm 2019</Link>
                           </td>
                           <td>
-                            <Badge color={getBadge(user.result)} pill>
+                            <Badge color={getBadge(user.result)} pillg>
                               {user.result}
                             </Badge>
                           </td>
