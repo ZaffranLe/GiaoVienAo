@@ -107,6 +107,11 @@ export default {
           icon: 'icon-puzzle',
         },
         {
+          name: 'Upload',
+          url: '/base/uploads',
+          icon: 'icon-puzzle',
+        },
+        {
           name: 'Jumbotrons',
           url: '/base/jumbotrons',
           icon: 'icon-puzzle',
