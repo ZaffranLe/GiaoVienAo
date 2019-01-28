@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import {
   Card,
   CardBody,
@@ -8,29 +7,115 @@ import {
   Row,
   Table,
   Progress,
-  Badge
+  Badge,
+  Pagination,
+  PaginationItem,
+  PaginationLink,
+  Input
 } from "reactstrap";
 
 import usersData from "./UsersData";
+import surveysData from "./SurveysData";
+import sharedFilesData from "./SharedFilesData";
+
+function FileRow(props) {
+  const file = props.file;
+
+  return (
+    <tr key={file.id.toString()}>
+      <th scope="row">{file.name}</th>
+      <td>{file.type}</td>
+      <td>{file.size}</td>
+      <td>
+        <i class="fa fa-download text-primary fa-2x" />
+      </td>
+    </tr>
+  );
+}
+
+function SurveyRow(props) {
+  const survey = props.survey;
+
+  return (
+    <tr key={survey.id.toString()}>
+      <th scope="row">{survey.name}</th>
+      <td>
+        <Badge color={getBadge(survey.result)} pill>
+          {survey.result}
+        </Badge>
+      </td>
+    </tr>
+  );
+}
+
+const getBadge = result => {
+  return result === "Tốt"
+    ? "success"
+    : result === "Đạt"
+    ? "secondary"
+    : result === "Khá"
+    ? "primary"
+    : result === "Chưa đạt"
+    ? "danger"
+    : "primary";
+};
 
 class User extends Component {
+  constructor() {
+    super();
+
+    this.pageSize = 4;
+    this.pagesFilesCount = Math.ceil(sharedFilesData.length / this.pageSize);
+    this.pagesSurveysCount = Math.ceil(surveysData.length / this.pageSize);
+
+    this.state = {
+      currentFilePage: 0,
+      currentSurveyPage: 0,
+      txtSearchFile: "",
+      txtSearchSurvey: ""
+    };
+  }
+
+  handleChangeFilePage(e, index) {
+    e.preventDefault();
+
+    this.setState({
+      currentFilePage: index
+    });
+  }
+
+  handleChangeSurveyPage(e, index) {
+    e.preventDefault();
+
+    this.setState({
+      currentSurveyPage: index
+    });
+  }
+
+  handleSearchSurveyChange(e) {
+    e.preventDefault();
+
+    this.setState({
+      txtSearchSurvey: e.target.value.toLowerCase()
+    });
+  }
+
+  handleSearchFileChange(e) {
+    e.preventDefault();
+
+    this.setState({
+      txtSearchFile: e.target.value.toLowerCase()
+    });
+  }
+
   render() {
+    const surveyList = surveysData;
+    const fileList = sharedFilesData;
     const user = usersData.find(
       user => user.id.toString() === this.props.match.params.id
     );
-
-    const getBadge = result => {
-      return result === "Tốt"
-        ? "success"
-        : result === "Đạt"
-        ? "secondary"
-        : result === "Khá"
-        ? "primary"
-        : result === "Chưa đạt"
-        ? "danger"
-        : "primary";
-    };
-    const userLink = `/users/${user.id}`;
+    const { currentFilePage } = this.state;
+    const { currentSurveyPage } = this.state;
     const userDetails = user
       ? Object.entries(user)
       : [
@@ -46,32 +131,34 @@ class User extends Component {
       <div className="animated fadeIn">
         <Row>
           <Col lg={6}>
-            <Card>
-              <CardHeader>
-                <strong>
-                  <i className="icon-info pr-1" />
-                  User id: {this.props.match.params.id}
-                </strong>
-              </CardHeader>
-              <CardBody>
-                <Table responsive striped hover>
-                  <tbody>
-                    {userDetails.map(([key, value]) => {
-                      return (
-                        <tr key={key}>
-                          <td>{`${key}:`}</td>
-                          <td>
-                            <strong>{value}</strong>
-                          </td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </Table>
-              </CardBody>
-            </Card>
-          </Col>
-          <Col lg={6}>
+            <Row>
+              <Col lg={12}>
+                <Card>
+                  <CardHeader>
+                    <strong>
+                      <i className="icon-info pr-1" />
+                      User id: {this.props.match.params.id}
+                    </strong>
+                  </CardHeader>
+                  <CardBody>
+                    <Table responsive striped hover>
+                      <tbody>
+                        {userDetails.map(([key, value]) => {
+                          return (
+                            <tr key={key}>
+                              <td>{`${key}:`}</td>
+                              <td>
+                                <strong>{value}</strong>
+                              </td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </Table>
+                  </CardBody>
+                </Card>
+              </Col>
+            </Row>
             <Row>
               <Col lg={12}>
                 <Card>
@@ -130,12 +217,125 @@ class User extends Component {
                   </CardBody>
                 </Card>
               </Col>
+            </Row>
+          </Col>
+          <Col lg={6}>
+            <Row>
               <Col lg={12}>
                 <Card>
                   <CardHeader>
-                    <h4>
-                      Tài liệu chia sẻ <i className="cui-share" />
-                    </h4>
+                    <Row>
+                      <Col lg={4}>
+                        <h4>
+                          <i className="cui-speech" /> Kết quả tự đánh giá
+                        </h4>
+                      </Col>
+                      <Col lg={8}>
+                        <Input
+                          type="text"
+                          name="txtSurveySearch"
+                          placeholder="Nhập tên kỳ đánh giá cần tìm"
+                          onChange={e => this.handleSearchSurveyChange(e)}
+                        />
+                      </Col>
+                    </Row>
+                  </CardHeader>
+                  <CardBody>
+                    <Table responsive hover className="text-center">
+                      <thead className="thead-light">
+                        <th>Kỳ đánh giá</th>
+                        <th>Xếp loại</th>
+                      </thead>
+                      <tbody>
+                        {this.state.txtSearchSurvey === ""
+                          ? surveyList
+                              .slice(
+                                currentSurveyPage * this.pageSize,
+                                (currentSurveyPage + 1) * this.pageSize
+                              )
+                              .map((survey, index) => (
+                                <SurveyRow key={index} survey={survey} />
+                              ))
+                          : surveyList
+                              .filter(survey =>
+                                survey.name
+                                  .toLowerCase()
+                                  .includes(this.state.txtSearchSurvey)
+                              )
+                              .slice(
+                                currentSurveyPage * this.pageSize,
+                                (currentSurveyPage + 1) * this.pageSize
+                              )
+                              .map((survey, index) => (
+                                <SurveyRow key={index} survey={survey} />
+                              ))}
+                      </tbody>
+                    </Table>
+                    <Pagination>
+                      <PaginationItem disabled={currentSurveyPage <= 0}>
+                        <PaginationLink
+                          previous
+                          tag="button"
+                          onClick={e =>
+                            this.handleChangeSurveyPage(
+                              e,
+                              currentSurveyPage - 1
+                            )
+                          }
+                        />
+                      </PaginationItem>
+                      {[...Array(this.pagesSurveysCount)].map((page, i) => (
+                        <PaginationItem
+                          active={i === currentSurveyPage}
+                          key={i}
+                        >
+                          <PaginationLink
+                            onClick={e => this.handleChangeSurveyPage(e, i)}
+                          >
+                            {i + 1}
+                          </PaginationLink>
+                        </PaginationItem>
+                      ))}
+                      <PaginationItem
+                        disabled={
+                          currentSurveyPage >= this.pagesSurveysCount - 1
+                        }
+                      >
+                        <PaginationLink
+                          next
+                          tag="button"
+                          onClick={e =>
+                            this.handleChangeSurveyPage(
+                              e,
+                              currentSurveyPage + 1
+                            )
+                          }
+                        />
+                      </PaginationItem>
+                    </Pagination>
+                  </CardBody>
+                </Card>
+              </Col>
+            </Row>
+            <Row>
+              <Col lg={12}>
+                <Card>
+                  <CardHeader>
+                    <Row>
+                      <Col lg={4}>
+                        <h4>
+                          <i className="cui-share" /> Tài liệu chia sẻ
+                        </h4>
+                      </Col>
+                      <Col lg={8}>
+                        <Input
+                          type="text"
+                          name="txtSearchFile"
+                          onChange={e => this.handleSearchFileChange(e)}
+                          placeholder="Nhập tên tài liệu cần tìm"
+                        />
+                      </Col>
+                    </Row>
                   </CardHeader>
                   <CardBody>
                     <Table responsive hover className="text-center">
@@ -148,51 +348,61 @@ class User extends Component {
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>
-                            <Link to={userLink}>
-                              Những nguyên lý cơ bản của chủ nghĩa Mác-Lênin
-                            </Link>
-                          </td>
-                          <td>Giáo trình triết học</td>
-                          <td>0.5</td>
-                          <td>
-                            <Link to={userLink}>
-                              <i className="fa fa-download fa-2x text-primary" />
-                            </Link>
-                          </td>
-                        </tr>
+                        {this.state.txtSearchFile === ""
+                          ? fileList
+                              .slice(
+                                currentFilePage * this.pageSize,
+                                (currentFilePage + 1) * this.pageSize
+                              )
+                              .map((file, index) => (
+                                <FileRow key={index} file={file} />
+                              ))
+                          : fileList
+                              .filter(survey =>
+                                survey.name
+                                  .toLowerCase()
+                                  .includes(this.state.txtSearchFile)
+                              )
+                              .slice(
+                                currentFilePage * this.pageSize,
+                                (currentFilePage + 1) * this.pageSize
+                              )
+                              .map((file, index) => (
+                                <FileRow key={index} file={file} />
+                              ))}
                       </tbody>
                     </Table>
-                  </CardBody>
-                </Card>
-              </Col>
-            </Row>
-            <Row>
-              <Col lg={12}>
-                <Card>
-                  <CardHeader>
-                    <h4>Kết quả tự đánh giá</h4>
-                  </CardHeader>
-                  <CardBody>
-                    <Table responsive hover className="text-center">
-                      <thead className="thead-light">
-                        <th>Kỳ đánh giá</th>
-                        <th>Xếp loại</th>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>
-                            <Link to={userLink}>Kỳ 1 năm 2019</Link>
-                          </td>
-                          <td>
-                            <Badge color={getBadge(user.result)} pillg>
-                              {user.result}
-                            </Badge>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </Table>
+                    <Pagination>
+                      <PaginationItem disabled={currentFilePage <= 0}>
+                        <PaginationLink
+                          previous
+                          tag="button"
+                          onClick={e =>
+                            this.handleChangeFilePage(e, currentFilePage - 1)
+                          }
+                        />
+                      </PaginationItem>
+                      {[...Array(this.pagesFilesCount)].map((page, i) => (
+                        <PaginationItem active={i === currentFilePage} key={i}>
+                          <PaginationLink
+                            onClick={e => this.handleChangeFilePage(e, i)}
+                          >
+                            {i + 1}
+                          </PaginationLink>
+                        </PaginationItem>
+                      ))}
+                      <PaginationItem
+                        disabled={currentFilePage >= this.pagesFilesCount - 1}
+                      >
+                        <PaginationLink
+                          next
+                          tag="button"
+                          onClick={e =>
+                            this.handleChangeFilePage(e, currentFilePage + 1)
+                          }
+                        />
+                      </PaginationItem>
+                    </Pagination>
                   </CardBody>
                 </Card>
               </Col>
