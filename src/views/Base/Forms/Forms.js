@@ -24,6 +24,8 @@ import {
   Label,
   Row,
 } from 'reactstrap';
+import { FilePond } from 'react-filepond';
+import 'filepond/dist/filepond.min.css';
 
 class Forms extends Component {
   constructor(props) {
@@ -62,6 +64,14 @@ class Forms extends Component {
                     <FormGroup>
                       <Label htmlFor="name">Name</Label>
                       <Input type="text" id="name" placeholder="Enter your name" required />
+                    </FormGroup>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col xs="12">
+                    <FormGroup>
+                      <Label htmlFor="name">Upload</Label>
+                      <FilePond/>
                     </FormGroup>
                   </Col>
                 </Row>
