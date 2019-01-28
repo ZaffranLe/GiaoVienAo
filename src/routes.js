@@ -1,6 +1,6 @@
 import React from 'react';
 import DefaultLayout from './containers/DefaultLayout';
-import maintest from './views/MainTest/maintest';
+// import maintest from './views/MainTest/maintest';
 import Maintest from './views/MainTest/maintest';
 
 const Breadcrumbs = React.lazy(() => import('./views/Base/Breadcrumbs'));
