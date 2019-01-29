@@ -15,7 +15,7 @@ import {
 } from "reactstrap";
 
 import usersData from "./UsersData";
-import surveysData from "./SurveysData";
+import surveysData from "../Survey/SurveysData";
 import sharedFilesData from "./SharedFilesData";
 
 function FileRow(props) {
