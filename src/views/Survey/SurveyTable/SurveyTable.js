@@ -11,9 +11,8 @@ import {
   Button,
   Alert
 } from "reactstrap";
-import surveyQuestionsData from "./SurveyQuestionsData";
-import groupsQuestionData from "./GroupsQuestionData";
-import SurveyTable from "./SurveyTable";
+import surveyQuestionsData from "../SurveyQuestionsData";
+import groupsQuestionData from "../GroupsQuestionData";
 
 function QuestionGroupHeader(props) {
   const group = props.group;
@@ -100,36 +99,35 @@ const getAlertColor = result => {
     : "primary";
 };
 
-class Survey extends Component {
-  constructor(){
-    super();
-
+class SurveyTable extends Component {
+  constructor(props) {
+    super(props);
     this.state = {
-      questionResult: Array(15).fill(null),
-      result: ""
-    }
+      questionResult: props.state.questionResult,
+      result: props.state.result
+    };
   }
 
   handleChange(e) {
-    var resultList = this.state.questionResult.slice();
+    const resultList = this.state.questionResult.slice();
     resultList[e.target.id] = e.target.value;
-    this.setState({
+    this.props.setState({
       questionResult: resultList,
       result: this.calculateResult(resultList)
     });
   }
 
-  calculateResult(resultList){
+  calculateResult(resultList) {
     var i;
     var kha = 0;
     var tot = 0;
-    for (i = 0; i < resultList.length; i++){
+    for (i = 0; i < resultList.length; i++) {
       if (resultList[i] === 1) return "Chưa đạt";
       resultList[i] === 3 ? kha++ : resultList[i] === 4 && tot++; // Short circuiting
     }
 
-    if (kha >= 10){
-      for (i = 2; i < 7; i++){
+    if (kha >= 10) {
+      for (i = 2; i < 7; i++) {
         if (resultList[i] < 3) return "Đạt";
       }
       return "Khá";
@@ -146,49 +144,44 @@ class Survey extends Component {
     const groupQuestionList = groupsQuestionData;
     const questionList = surveyQuestionsData;
     return (
-      <div className="animated fadeIn">
-        <Form>
-          <Row>
-            <Col lg={12}>
-              <Table bordered responsive className="bg-white text-center">
-                <thead className="bg-primary">
-                  <th className="text-left align-middle">
-                    Mô tả tiêu chí đánh giá
-                  </th>
-                  <th className="align-middle">Chưa đạt</th>
-                  <th className="align-middle">Đạt</th>
-                  <th className="align-middle">Khá</th>
-                  <th className="align-middle">Tốt</th>
-                </thead>
-                <tbody>
-                  {groupQuestionList.map((group, index) => [
-                    <QuestionGroupHeader key={index} group={group} />,
-                    questionList.map((question, index) =>
-                      question.group === group.id && (
-                        <QuestionRow key={index} onChange={e => this.handleChange(e)} question={question} />
-                      )
-                    )
-                  ])}
-                  <tr>
-                    <td className="align-middle">
-                      <Alert color={getAlertColor(this.state.result)}>
-                        Xếp loại hiện tại: <strong>{this.state.result}</strong>
-                      </Alert>
-                    </td>
-                    <td colspan="4" className="align-middle">
-                      <Button className="btn-pill" color="primary">
-                        Lưu bản đánh giá
-                      </Button>
-                    </td>
-                  </tr>
-                </tbody>
-              </Table>
-            </Col>
-          </Row>
-        </Form>
-      </div>
+      <Table bordered responsive className="bg-white text-center">
+        <thead className="bg-primary">
+          <th className="text-left align-middle">Mô tả tiêu chí đánh giá</th>
+          <th className="align-middle">Chưa đạt</th>
+          <th className="align-middle">Đạt</th>
+          <th className="align-middle">Khá</th>
+          <th className="align-middle">Tốt</th>
+        </thead>
+        <tbody>
+          {groupQuestionList.map((group, index) => [
+            <QuestionGroupHeader key={index} group={group} />,
+            questionList.map(
+              (question, index) =>
+                question.group === group.id && (
+                  <QuestionRow
+                    key={index}
+                    onChange={e => this.handleChange(e)}
+                    question={question}
+                  />
+                )
+            )
+          ])}
+          <tr>
+            <td className="align-middle">
+              <Alert color={getAlertColor(this.state.result)}>
+                Xếp loại hiện tại: <strong>{this.state.result}</strong>
+              </Alert>
+            </td>
+            <td colspan="4" className="align-middle">
+              <Button className="btn-pill" color="primary">
+                Lưu bản đánh giá
+              </Button>
+            </td>
+          </tr>
+        </tbody>
+      </Table>
     );
   }
 }
 
-export default Survey;
+export default SurveyTable;
