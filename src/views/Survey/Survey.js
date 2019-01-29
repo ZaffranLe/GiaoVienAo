@@ -111,8 +111,8 @@ class Survey extends Component {
   }
 
   handleChange(e) {
-    var resultList = this.state.questionResult.slice();
-    resultList[e.target.id] = e.target.value;
+    const resultList = this.state.questionResult.slice();
+    resultList[e.target.name] = e.target.value;
     this.setState({
       questionResult: resultList,
       result: this.calculateResult(resultList)
