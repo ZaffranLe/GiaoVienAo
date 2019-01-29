@@ -13,7 +13,6 @@ import {
 } from "reactstrap";
 import surveyQuestionsData from "./SurveyQuestionsData";
 import groupsQuestionData from "./GroupsQuestionData";
-import SurveyTable from "./SurveyTable";
 
 function QuestionGroupHeader(props) {
   const group = props.group;
