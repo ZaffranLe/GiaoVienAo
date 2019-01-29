@@ -105,7 +105,7 @@ class Survey extends Component {
     super();
 
     this.state = {
-      questionResult: Array(15).fill(null),
+      questionResult: Array(15).fill(1),
       result: ""
     }
   }
@@ -113,9 +113,10 @@ class Survey extends Component {
   handleChange(e) {
     const resultList = this.state.questionResult.slice();
     resultList[e.target.name] = e.target.value;
+    const result = this.calculateResult(resultList);
     this.setState({
       questionResult: resultList,
-      result: this.calculateResult(resultList)
+      result: result
     });
   }
 
@@ -124,20 +125,21 @@ class Survey extends Component {
     var kha = 0;
     var tot = 0;
     for (i = 0; i < resultList.length; i++){
-      if (resultList[i] === 1) return "Chưa đạt";
-      resultList[i] === 3 ? kha++ : resultList[i] === 4 && tot++; // Short circuiting
+      if (resultList[i] == 1) return "Chưa đạt";
+      resultList[i] == 3 ? kha++ : resultList[i] == 4 && tot++; // Short circuiting
     }
 
     if (kha >= 10){
       for (i = 2; i < 7; i++){
-        if (resultList[i] < 3) return "Đạt";
+        if (resultList[i] == 2) return "Đạt";
       }
       return "Khá";
     }
     if (tot >= 10) {
       for (i = 2; i < 7; i++) {
-        if (resultList[i] < 4) return "Khá";
+        if ((resultList[i] == 3) || (resultList[i] == 2)) return "Khá";
       }
+      return "Tốt";
     }
     return "Đạt";
   }
