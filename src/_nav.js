@@ -36,7 +36,7 @@ export default {
     },
     {
       name: 'Đánh giá theo TT 20',
-      url: '#',
+      url: '/survey',
       icon: 'cui-pencil',
     },
     {

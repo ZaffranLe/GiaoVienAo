@@ -38,7 +38,7 @@ const Typography = React.lazy(() => import('./views/Theme/Typography'));
 const Widgets = React.lazy(() => import('./views/Widgets/Widgets'));
 const Users = React.lazy(() => import('./views/Users/Users'));
 const User = React.lazy(() => import('./views/Users/User'));
-
+const Survey = React.lazy(() => import('./views/Survey/Survey'));
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
@@ -85,6 +85,7 @@ const routes = [
   { path: '/charts', name: 'Charts', component: Charts },
   { path: '/users', exact: true,  name: 'Danh sách thành viên', component: Users },
   { path: '/users/:id', exact: true, name: 'Thông tin chi tiết', component: User },
+  { path: '/survey', exact: true, name: 'Đánh giá theo TT 20', component: Survey },
 ];
 
 export default routes;
