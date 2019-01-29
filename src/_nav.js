@@ -26,7 +26,7 @@ export default {
     // },
     {
       name: 'Tra cứu văn bản',
-      url: '#',
+      url: '/tracuuvanban',
       icon: 'cui-file',
     },
     {
