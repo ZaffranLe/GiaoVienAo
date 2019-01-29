@@ -21,7 +21,7 @@ function QuestionGroupHeader(props) {
       <td colspan="5" className="text-left bg-light">
         <strong>
           <h4>
-            Tiêu chuẩn {group.id}. {group.name}
+            Tiêu chuẩn {group.id + 1}. {group.name}
           </h4>
         </strong>
       </td>
@@ -37,7 +37,7 @@ function QuestionRow(props) {
         <Card>
           <CardHeader>
             <strong>
-              Tiêu chí {question.id}: {question.name}
+              Tiêu chí {question.id + 1}: {question.name}
             </strong>
           </CardHeader>
           <CardBody>
@@ -97,6 +97,19 @@ const getAlertColor = result => {
 };
 
 class Survey extends Component {
+  constructor(){
+    super();
+
+    this.state = {
+      questionResult: Array(15).fill(1),
+      result: ""
+    }
+  }
+
+  handleClick(e, i) {
+    const resultList = this.state.questionResult.slice();
+    resultList[i] = e.target.value; 
+  }
 
   render() {
     const groupQuestionList = groupsQuestionData;
@@ -107,7 +120,7 @@ class Survey extends Component {
           <Row>
             <Col lg={12}>
               <Table bordered responsive className="bg-white text-center">
-                <thead>
+                <thead className="bg-primary">
                   <th className="text-left align-middle">
                     Mô tả tiêu chí đánh giá
                   </th>
@@ -119,16 +132,16 @@ class Survey extends Component {
                 <tbody>
                   {groupQuestionList.map((group, index) => [
                     <QuestionGroupHeader key={index} group={group} />,
-                    questionList.map((question, index2) =>
+                    questionList.map((question, index) =>
                       question.group === group.id ? (
-                        <QuestionRow key={index2} question={question} />
+                        <QuestionRow key={index} question={question} />
                       ) : null
                     )
                   ])}
                   <tr>
                     <td className="align-middle">
-                      <Alert color={getAlertColor("Chưa đạt")}>
-                        Xếp loại hiện tại: <strong>Chưa đạt</strong>
+                      <Alert color={getAlertColor(this.state.result)}>
+                        Xếp loại hiện tại: <strong>{this.state.result}</strong>
                       </Alert>
                     </td>
                     <td colspan="4" className="align-middle">
