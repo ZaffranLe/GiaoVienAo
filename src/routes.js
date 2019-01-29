@@ -2,6 +2,8 @@ import React from 'react';
 import DefaultLayout from './containers/DefaultLayout';
 // import maintest from './views/MainTest/maintest';
 import Maintest from './views/MainTest/maintest';
+import Tracuuvanban from './views/traCuuVanBan/Tracuuvanban';
+import ChiTietVanBan from './views/traCuuVanBan/detailVanBan/chiTietVanBan';
 
 const Breadcrumbs = React.lazy(() => import('./views/Base/Breadcrumbs'));
 const Cards = React.lazy(() => import('./views/Base/Cards'));
@@ -45,6 +47,8 @@ const routes = [
   { path: '/', exact: true, name: 'Trang chủ', component: DefaultLayout },
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
   { path: '/maintest', name: 'Maintest', component: Maintest },
+  { path: '/tracuuvanban', name: 'Tra Cứu Văn Bản', component: Tracuuvanban },
+  { path: '/chitietvanban',exact:true, name: 'Chi Tiết Văn Bản', component: ChiTietVanBan },
   { path: '/theme', exact: true, name: 'Theme', component: Colors },
   { path: '/theme/colors', name: 'Colors', component: Colors },
   { path: '/theme/typography', name: 'Typography', component: Typography },
