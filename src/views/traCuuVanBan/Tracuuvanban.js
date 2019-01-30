@@ -99,101 +99,97 @@ class TraCuuVanBan extends Component {
       <div className="animated fadeIn">
         <Row>
           <Col xs="12" md="12">
-            <div className="p-5">
-              <Card>
-                <CardHeader>
-                  <Row>
-                    <Col lg={4}>
-                      <h3>
-                        <i className="fa fa-align-justify" /> Danh sách văn bản
-                      </h3>
-                    </Col>
-                    <Col lg={4}>
-                      <Input
-                        onChange={e => this.handleSearchType(e)}
-                        type="select"
-                        name="select"
-                        id="select"
-                      >
-                        <option value="" default>
-                          Tìm theo thể loại văn bản (Tất cả)
-                        </option>
-                        {typeList.map((type, index) => (
-                          <TypeOption key={index} type={type} />
-                        ))}
-                      </Input>
-                    </Col>
-                    <Col lg={4}>
-                      <Input
-                        type="text"
-                        placeholder="Tìm theo tên văn bản"
-                        onChange={e => this.handleSearchName(e)}
-                      />
-                    </Col>
-                  </Row>
-                </CardHeader>
-                <CardBody>
-                  <Table responsive hover>
-                    <thead>
-                      <tr>
-                        <th>#</th>
-                        <th>Tên văn bản</th>
-                        <th>Thể loại</th>
-                        <th>Ngày đăng</th>
-                        <th />
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {vanBanList
-                        .filter(vanBan => {
-                          if (
-                            vanBan.name
-                              .toLowerCase()
-                              .includes(this.state.nameSearch) &&
-                            vanBan.type.includes(this.state.typeSearch)
-                          )
-                            return true;
-                          return false;
-                        })
-                        .slice(
-                          currentPage * this.pageSize,
-                          (currentPage + 1) * this.pageSize
-                        )
-                        .map((vanBan, index) => (
-                          <VanBanRow key={index} vanBan={vanBan} />
-                        ))}
-                    </tbody>
-                  </Table>
-                  <Pagination>
-                    <PaginationItem disabled={currentPage <= 0}>
-                      <PaginationLink
-                        previous
-                        tag="button"
-                        onClick={e => this.handleChangePage(e, currentPage - 1)}
-                      />
-                    </PaginationItem>
-                    {[...Array(this.pagesCount)].map((page, i) => (
-                      <PaginationItem active={i === currentPage} key={i}>
-                        <PaginationLink
-                          onClick={e => this.handleChangePage(e, i)}
-                        >
-                          {i + 1}
-                        </PaginationLink>
-                      </PaginationItem>
-                    ))}
-                    <PaginationItem
-                      disabled={currentPage >= this.pagesCount - 1}
+            <Card>
+              <CardHeader>
+                <Row>
+                  <Col lg={4}>
+                    <h3>
+                      <i className="fa fa-align-justify" /> Danh sách văn bản
+                    </h3>
+                  </Col>
+                  <Col lg={4}>
+                    <Input
+                      onChange={e => this.handleSearchType(e)}
+                      type="select"
+                      name="select"
+                      id="select"
                     >
+                      <option value="" default>
+                        Tìm theo thể loại văn bản (Tất cả)
+                      </option>
+                      {typeList.map((type, index) => (
+                        <TypeOption key={index} type={type} />
+                      ))}
+                    </Input>
+                  </Col>
+                  <Col lg={4}>
+                    <Input
+                      type="text"
+                      placeholder="Tìm theo tên văn bản"
+                      onChange={e => this.handleSearchName(e)}
+                    />
+                  </Col>
+                </Row>
+              </CardHeader>
+              <CardBody>
+                <Table responsive hover>
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Tên văn bản</th>
+                      <th>Thể loại</th>
+                      <th>Ngày đăng</th>
+                      <th />
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {vanBanList
+                      .filter(vanBan => {
+                        if (
+                          vanBan.name
+                            .toLowerCase()
+                            .includes(this.state.nameSearch) &&
+                          vanBan.type.includes(this.state.typeSearch)
+                        )
+                          return true;
+                        return false;
+                      })
+                      .slice(
+                        currentPage * this.pageSize,
+                        (currentPage + 1) * this.pageSize
+                      )
+                      .map((vanBan, index) => (
+                        <VanBanRow key={index} vanBan={vanBan} />
+                      ))}
+                  </tbody>
+                </Table>
+                <Pagination>
+                  <PaginationItem disabled={currentPage <= 0}>
+                    <PaginationLink
+                      previous
+                      tag="button"
+                      onClick={e => this.handleChangePage(e, currentPage - 1)}
+                    />
+                  </PaginationItem>
+                  {[...Array(this.pagesCount)].map((page, i) => (
+                    <PaginationItem active={i === currentPage} key={i}>
                       <PaginationLink
-                        next
-                        tag="button"
-                        onClick={e => this.handleChangePage(e, currentPage + 1)}
-                      />
+                        onClick={e => this.handleChangePage(e, i)}
+                      >
+                        {i + 1}
+                      </PaginationLink>
                     </PaginationItem>
-                  </Pagination>
-                </CardBody>
-              </Card>
-            </div>
+                  ))}
+                  <PaginationItem disabled={currentPage >= this.pagesCount - 1}>
+                    <PaginationLink
+                      next
+                      tag="button"
+                      onClick={e => this.handleChangePage(e, currentPage + 1)}
+                    />
+                  </PaginationItem>
+                </Pagination>
+              </CardBody>
+            </Card>
           </Col>
         </Row>
       </div>
