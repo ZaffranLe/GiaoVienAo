@@ -20,9 +20,9 @@ import {
   Row,
 
 } from 'reactstrap';
-const vbLink = `/chitietvanban`;
+const vbLink = `/chiTietVanBan`;
 
-class Tracuuvanban extends Component {
+class TraCuuVanBan extends Component {
 
   render() {
     return (
@@ -161,4 +161,4 @@ class Tracuuvanban extends Component {
 }
 
 
-export default Tracuuvanban;
+export default TraCuuVanBan;
