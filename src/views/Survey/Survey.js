@@ -124,18 +124,23 @@ class Survey extends Component {
     var kha = 0;
     var tot = 0;
     for (i = 0; i < resultList.length; i++){
+      // eslint-disable-next-line
       if (resultList[i] == 1) return "Chưa đạt";
+      // eslint-disable-next-line
       resultList[i] == 3 ? kha++ : resultList[i] == 4 && tot++; // Short circuiting
     }
 
     if (kha >= 10){
       for (i = 2; i < 7; i++){
+        // eslint-disable-next-line
         if (resultList[i] == 2) return "Đạt";
       }
       return "Khá";
     }
     if (tot >= 10) {
+      // eslint-disable-next-line
       for (i = 2; i < 7; i++) {
+        // eslint-disable-next-line
         if ((resultList[i] == 3) || (resultList[i] == 2)) return "Khá";
       }
       return "Tốt";
