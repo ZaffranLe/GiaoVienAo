@@ -1,5 +1,6 @@
 import React from 'react';
 import DefaultLayout from './containers/DefaultLayout';
+import UploadHocLieu from './views/uploadHocLieu/uploadHocLieu';
 
 const Breadcrumbs = React.lazy(() => import('./views/Base/Breadcrumbs'));
 const Cards = React.lazy(() => import('./views/Base/Cards'));
@@ -40,7 +41,7 @@ const Users = React.lazy(() => import('./views/Users/Users'));
 const User = React.lazy(() => import('./views/Users/User'));
 const Survey = React.lazy(() => import('./views/Survey/Survey'));
 const Maintest = React.lazy(() => import('./views/MainTest/maintest'));
-const TraCuuVanBan = React.lazy(() => import('./views/traCuuVanBan/TraCuuVanBan'));
+const TraCuuVanBan = React.lazy(() => import('./views/traCuuVanBan/Tracuuvanban'));
 const ChiTietVanBan = React.lazy(() => import('./views/traCuuVanBan/detailVanBan/chiTietVanBan'));
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
@@ -92,6 +93,7 @@ const routes = [
   { path: '/maintest', name: 'Maintest', component: Maintest },
   { path: '/traCuuVanBan', exact: true, name: 'Tra Cứu Văn Bản', component: TraCuuVanBan },
   { path: '/traCuuVanBan/:id', exact:true, name: 'Chi Tiết Văn Bản', component: ChiTietVanBan },
+  { path: '/uploadHocLieu', exact:true, name: 'Upload Học Liệu', component: UploadHocLieu },
 ];
 
 export default routes;

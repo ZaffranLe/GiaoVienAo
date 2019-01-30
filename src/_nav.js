@@ -35,6 +35,11 @@ export default {
       icon: 'cui-layers',
     },
     {
+      name: 'Upload tài liệu',
+      url: '/uploadHocLieu',
+      icon: 'cui-layers',
+    },
+    {
       name: 'Đánh giá theo TT 20',
       url: '/survey',
       icon: 'cui-pencil',
