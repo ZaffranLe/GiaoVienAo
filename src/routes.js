@@ -35,7 +35,7 @@ const Modals = React.lazy(() => import('./views/Notifications/Modals'));
 const Colors = React.lazy(() => import('./views/Theme/Colors'));
 const Typography = React.lazy(() => import('./views/Theme/Typography'));
 const Widgets = React.lazy(() => import('./views/Widgets/Widgets'));
-// Không phải tempalte
+// Không phải template
 const Users = React.lazy(() => import('./views/Users/Users'));
 const User = React.lazy(() => import('./views/Users/User'));
 const Survey = React.lazy(() => import('./views/Survey/Survey'));
@@ -47,9 +47,6 @@ const ChiTietVanBan = React.lazy(() => import('./views/traCuuVanBan/detailVanBan
 const routes = [
   { path: '/', exact: true, name: 'Trang chủ', component: DefaultLayout },
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
-  { path: '/maintest', name: 'Maintest', component: Maintest },
-  { path: '/traCuuVanban', name: 'Tra Cứu Văn Bản', component: TraCuuVanBan },
-  { path: '/chiTietVanBan',exact:true, name: 'Chi Tiết Văn Bản', component: ChiTietVanBan },
   { path: '/theme', exact: true, name: 'Theme', component: Colors },
   { path: '/theme/colors', name: 'Colors', component: Colors },
   { path: '/theme/typography', name: 'Typography', component: Typography },
@@ -88,9 +85,13 @@ const routes = [
   { path: '/notifications/modals', name: 'Modals', component: Modals },
   { path: '/widgets', name: 'Widgets', component: Widgets },
   { path: '/charts', name: 'Charts', component: Charts },
+  // Không phải template
   { path: '/users', exact: true,  name: 'Danh sách thành viên', component: Users },
   { path: '/users/:id', exact: true, name: 'Thông tin chi tiết', component: User },
   { path: '/survey', exact: true, name: 'Đánh giá theo TT 20', component: Survey },
+  { path: '/maintest', name: 'Maintest', component: Maintest },
+  { path: '/traCuuVanBan', exact: true, name: 'Tra Cứu Văn Bản', component: TraCuuVanBan },
+  { path: '/traCuuVanBan/:id', exact:true, name: 'Chi Tiết Văn Bản', component: ChiTietVanBan },
 ];
 
 export default routes;
