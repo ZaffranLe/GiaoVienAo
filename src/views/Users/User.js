@@ -222,16 +222,7 @@ class User extends Component {
                         </tr>
                       </thead>
                       <tbody>
-                        {this.state.txtSearchFile === ""
-                          ? fileList
-                              .slice(
-                                currentFilePage * this.pageSize,
-                                (currentFilePage + 1) * this.pageSize
-                              )
-                              .map((file, index) => (
-                                <FileRow key={index} file={file} />
-                              ))
-                          : fileList
+                        {fileList
                               .filter(survey =>
                                 survey.name
                                   .toLowerCase()
@@ -310,16 +301,7 @@ class User extends Component {
                         <th>Xếp loại</th>
                       </thead>
                       <tbody>
-                        {this.state.txtSearchSurvey === ""
-                          ? surveyList
-                              .slice(
-                                currentSurveyPage * this.pageSize,
-                                (currentSurveyPage + 1) * this.pageSize
-                              )
-                              .map((survey, index) => (
-                                <SurveyRow key={index} survey={survey} />
-                              ))
-                          : surveyList
+                        {surveyList
                               .filter(survey =>
                                 survey.name
                                   .toLowerCase()
