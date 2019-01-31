@@ -31,7 +31,7 @@ export default {
     },
     {
       name: 'Kho tài liệu',
-      url: '#',
+      url: '/documents',
       icon: 'cui-layers',
     },
     {
