@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   Card,
   CardBody,
@@ -9,94 +9,129 @@ import {
   Row,
   FormText,
   Input,
-  Button,
-} from 'reactstrap';
-import { FilePond } from 'react-filepond';
-import 'filepond/dist/filepond.min.css';
+  Button
+} from "reactstrap";
+import { FilePond } from "react-filepond";
+import "filepond/dist/filepond.min.css";
+import type from "../traCuuVanBan/TheLoaiVanBanData";
+
+function TypeOption(props) {
+  const type = props.type;
+  return (
+    <option key={type.id.toString()} value={type.name}>
+      {type.name}
+    </option>
+  );
+}
 
 class UploadHocLieu extends Component {
   constructor(props) {
     super(props);
 
-    this.toggle = this.toggle.bind(this);
-    this.toggleFade = this.toggleFade.bind(this);
     this.state = {
-      collapse: true,
-      fadeIn: true,
-      timeout: 300
+      share: false
     };
   }
 
-  toggle() {
-    this.setState({ collapse: !this.state.collapse });
-  }
-
-  toggleFade() {
-    this.setState((prevState) => { return { fadeIn: !prevState } });
-  }
+  handleShare = () => {
+    if (this.state.share) {
+      this.setState({ share: false });
+    } else {
+      this.setState({ share: true });
+    }
+  };
 
   render() {
+    const typeList = type;
     return (
       <div className="animated fadeIn">
         <Row>
-          <Col xs="12" sm="12" className="p-5">
+          <Col lg={12}>
             <Card>
               <CardHeader>
                 <strong>Upload Tài Liệu</strong>
               </CardHeader>
               <CardBody>
-
                 <Row>
-                  <Col xs="3">
+                  <Col lg={3}>
                     <FormGroup>
-                      <Label htmlFor="name">Upload</Label>
+                      <Label>Upload</Label>
                       <FilePond allowMultiple={true} />
                     </FormGroup>
                   </Col>
-                  <Col xs="9">
-                    <FormGroup>
-                      <Label >Tên tài liệu</Label>
-                      <Input placeholder="nhập tên tài liệu" />
-                    </FormGroup>
-                    <FormGroup>
-                      <Label >Loại tài liệu</Label>
-                      <Input placeholder="Loại tài liệu..." />
-                    </FormGroup>
-                    <FormGroup>
-                      <Label >Thẻ Tìm Kiếm</Label>
-                      <Input placeholder="Thẻ tìm kiếm....." />
-                    </FormGroup>
-                    <FormGroup>
-                      <Label >Thẻ Tìm Kiếm</Label>
-                      <Input placeholder="Thẻ tìm kiếm....." />
-                    </FormGroup>
-                    <FormGroup row>
-                      <Col md="2" className="p-4">
-                        <FormGroup check className="checkbox">
-                          <Input className="form-check-input" type="checkbox" id="checkbox1" name="checkbox1" value="option1" />
-                          <Label check className="form-check-label" htmlFor="checkbox1">Công khai</Label>
+                  <Col lg={9}>
+                    <Row>
+                      <Col lg={12}>
+                        <FormGroup>
+                          <Label>Tên tài liệu</Label>
+                          <Input type="text" placeholder="Nhập tên tài liệu" />
                         </FormGroup>
                       </Col>
-                      <Col md="5">
+                    </Row>
+                    <Row>
+                      <Col lg={12}>
+                        <FormGroup>
+                          <Label>Loại tài liệu</Label>
+                          <Input type="select" name="select" id="select">
+                            <option value="" default>
+                              Lựa chọn
+                            </option>
+                            {typeList.map((type, index) => (
+                              <TypeOption key={index} type={type} />
+                            ))}
+                          </Input>
+                        </FormGroup>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col lg={12}>
+                        <FormGroup>
+                          <Label>Tag</Label>
+                          <Input type="text" />
+                        </FormGroup>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col lg={2}>
+                        <FormGroup check className="checkbox">
+                          <Input
+                            className="form-check-input"
+                            type="checkbox"
+                            id="checkbox1"
+                            name="checkbox1"
+                            onChange={this.handleShare}
+                          />
+                          <Label
+                            check
+                            className="form-check-label"
+                            htmlFor="checkbox1"
+                          >
+                            Công khai
+                          </Label>
+                        </FormGroup>
+                      </Col>
+                      <Col lg={10}>
                         <FormGroup>
                           <FormText>Thành viên chia sẻ</FormText>
-                          <Input placeholder="Thành viên chia sẻ..." />
+                          <Input
+                            disabled={this.state.share}
+                            placeholder="Thành viên chia sẻ..."
+                          />
                         </FormGroup>
                       </Col>
-                      <Col md="5" className="p-4">
-                        <Button type="submit" size="sm" color="primary"><i className="fa fa-dot-circle-o"></i> Lưu tài liệu</Button>
-
-
+                    </Row>
+                    <Row>
+                      <Col lg={12}>
+                        <Button className="float-right" color="primary">
+                          <i className="fa fa-save" /> Lưu tài liệu
+                        </Button>
                       </Col>
-                    </FormGroup>
+                    </Row>
                   </Col>
                 </Row>
-
-
               </CardBody>
             </Card>
           </Col>
-          
         </Row>
       </div>
     );
