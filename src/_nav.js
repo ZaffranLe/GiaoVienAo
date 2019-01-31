@@ -26,7 +26,7 @@ export default {
     // },
     {
       name: 'Tra cứu văn bản',
-      url: '#',
+      url: '/traCuuVanBan',
       icon: 'cui-file',
     },
     {
@@ -35,8 +35,13 @@ export default {
       icon: 'cui-layers',
     },
     {
+      name: 'Upload tài liệu',
+      url: '/uploadHocLieu',
+      icon: 'cui-layers',
+    },
+    {
       name: 'Đánh giá theo TT 20',
-      url: '#',
+      url: '/survey',
       icon: 'cui-pencil',
     },
     {

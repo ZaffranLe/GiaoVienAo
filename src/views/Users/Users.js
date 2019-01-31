@@ -125,28 +125,17 @@ class Users extends Component {
                     </tr>
                   </thead>
                   <tbody>
-                    {this.state.txtSearch === ""
-                      ? userList
-                          .slice(
-                            currentPage * this.pageSize,
-                            (currentPage + 1) * this.pageSize
-                          )
-                          .map((user, index) => (
-                            <UserRow key={index} user={user} />
-                          ))
-                      : userList
-                          .filter(user =>
-                            user.name
-                              .toLowerCase()
-                              .includes(this.state.txtSearch)
-                          )
-                          .slice(
-                            currentPage * this.pageSize,
-                            (currentPage + 1) * this.pageSize
-                          )
-                          .map((user, index) => (
-                            <UserRow key={index} user={user} />
-                          ))}
+                    {userList
+                      .filter(user =>
+                        user.name.toLowerCase().includes(this.state.txtSearch)
+                      )
+                      .slice(
+                        currentPage * this.pageSize,
+                        (currentPage + 1) * this.pageSize
+                      )
+                      .map((user, index) => (
+                        <UserRow key={index} user={user} />
+                      ))}
                   </tbody>
                 </Table>
                 <Pagination>

@@ -1,7 +1,11 @@
 import React from 'react';
 import DefaultLayout from './containers/DefaultLayout';
+<<<<<<< HEAD
 import Maintest from './views/MainTest/maintest';
 import Documents from './views/Documents/Documents';
+=======
+import UploadHocLieu from './views/uploadHocLieu/uploadHocLieu';
+>>>>>>> ac7f3cc342a2a75a817b6f84ce5ae47642f20b74
 
 const Breadcrumbs = React.lazy(() => import('./views/Base/Breadcrumbs'));
 const Cards = React.lazy(() => import('./views/Base/Cards'));
@@ -37,16 +41,19 @@ const Modals = React.lazy(() => import('./views/Notifications/Modals'));
 const Colors = React.lazy(() => import('./views/Theme/Colors'));
 const Typography = React.lazy(() => import('./views/Theme/Typography'));
 const Widgets = React.lazy(() => import('./views/Widgets/Widgets'));
+// Không phải template
 const Users = React.lazy(() => import('./views/Users/Users'));
 const User = React.lazy(() => import('./views/Users/User'));
-
+const Survey = React.lazy(() => import('./views/Survey/Survey'));
+const Maintest = React.lazy(() => import('./views/MainTest/maintest'));
+const TraCuuVanBan = React.lazy(() => import('./views/traCuuVanBan/TraCuuVanBan'));
+const ChiTietVanBan = React.lazy(() => import('./views/traCuuVanBan/detailVanBan/chiTietVanBan'));
 
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
   { path: '/', exact: true, name: 'Trang chủ', component: DefaultLayout },
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
-  { path: '/maintest', name: 'Maintest', component: Maintest },
   { path: '/theme', exact: true, name: 'Theme', component: Colors },
   { path: '/theme/colors', name: 'Colors', component: Colors },
   { path: '/theme/typography', name: 'Typography', component: Typography },
@@ -85,10 +92,14 @@ const routes = [
   { path: '/notifications/modals', name: 'Modals', component: Modals },
   { path: '/widgets', name: 'Widgets', component: Widgets },
   { path: '/charts', name: 'Charts', component: Charts },
+  // Không phải template
   { path: '/users', exact: true,  name: 'Danh sách thành viên', component: Users },
   { path: '/users/:id', exact: true, name: 'Thông tin chi tiết', component: User },
-  { path: '/documents', exact: true, name: 'Kho tài liệu', component: Documents },
-
+  { path: '/survey', exact: true, name: 'Đánh giá theo TT 20', component: Survey },
+  { path: '/maintest', name: 'Maintest', component: Maintest },
+  { path: '/traCuuVanBan', exact: true, name: 'Tra Cứu Văn Bản', component: TraCuuVanBan },
+  { path: '/traCuuVanBan/:id', exact:true, name: 'Chi Tiết Văn Bản', component: ChiTietVanBan },
+  { path: '/uploadHocLieu', exact:true, name: 'Upload Học Liệu', component: UploadHocLieu },
 ];
 
 export default routes;
