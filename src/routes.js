@@ -1,11 +1,7 @@
 import React from 'react';
 import DefaultLayout from './containers/DefaultLayout';
-<<<<<<< HEAD
-import Maintest from './views/MainTest/maintest';
 import Documents from './views/Documents/Documents';
-=======
 import UploadHocLieu from './views/uploadHocLieu/uploadHocLieu';
->>>>>>> ac7f3cc342a2a75a817b6f84ce5ae47642f20b74
 
 const Breadcrumbs = React.lazy(() => import('./views/Base/Breadcrumbs'));
 const Cards = React.lazy(() => import('./views/Base/Cards'));
@@ -95,6 +91,8 @@ const routes = [
   // Không phải template
   { path: '/users', exact: true,  name: 'Danh sách thành viên', component: Users },
   { path: '/users/:id', exact: true, name: 'Thông tin chi tiết', component: User },
+  { path: '/documents', exact: true, name: 'Kho tài liệu', component: Documents },
+
   { path: '/survey', exact: true, name: 'Đánh giá theo TT 20', component: Survey },
   { path: '/maintest', name: 'Maintest', component: Maintest },
   { path: '/traCuuVanBan', exact: true, name: 'Tra Cứu Văn Bản', component: TraCuuVanBan },
