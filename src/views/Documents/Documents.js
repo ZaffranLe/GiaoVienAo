@@ -76,14 +76,6 @@ class Documents extends Component {
     render() {
         const { activeIndex } = this.state;
 
-        const slides = items.map((item) => {
-            return (
-                <CarouselItem onExiting={this.onExiting} onExited={this.onExited} key={item.src}>
-                    <img className="d-block w-100" src={item.src} alt={item.altText} />
-                </CarouselItem>
-            );
-        });
-
         const slides2 = items.map((item) => {
             return (
                 <CarouselItem
