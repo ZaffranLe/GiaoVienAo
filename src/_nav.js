@@ -2,16 +2,6 @@ export default {
   items: [
     {
       name: 'Trang chủ',
-      url: '/dashboard',
-      icon: 'cui-home',
-
-      // badge: {
-      //   variant: 'info',
-      //   text: 'NEW',
-      // },
-    },
-    {
-      name: 'maintest',
       url: '/maintest',
       icon: 'cui-home',
     },
