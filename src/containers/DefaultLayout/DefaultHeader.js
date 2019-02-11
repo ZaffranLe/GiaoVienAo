@@ -1,19 +1,12 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import {
-  Badge,
-  DropdownItem,
-  DropdownMenu,
-  DropdownToggle,
   Nav,
   NavItem,
-  NavLink
 } from "reactstrap";
 import PropTypes from "prop-types";
 
 import {
-  AppAsideToggler,
-  AppHeaderDropdown,
   AppNavbarBrand,
   AppSidebarToggler
 } from "@coreui/react";
