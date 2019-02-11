@@ -4,10 +4,16 @@ export default {
       name: 'Trang chủ',
       url: '/dashboard',
       icon: 'cui-home',
+
       // badge: {
       //   variant: 'info',
       //   text: 'NEW',
       // },
+    },
+    {
+      name: 'maintest',
+      url: '/maintest',
+      icon: 'cui-home',
     },
     // {
     //   title: true,
@@ -20,17 +26,22 @@ export default {
     // },
     {
       name: 'Tra cứu văn bản',
-      url: '#',
+      url: '/traCuuVanBan',
       icon: 'cui-file',
     },
     {
       name: 'Kho tài liệu',
-      url: '#',
+      url: '/documents',
+      icon: 'cui-layers',
+    },
+    {
+      name: 'Upload tài liệu',
+      url: '/uploadHocLieu',
       icon: 'cui-layers',
     },
     {
       name: 'Đánh giá theo TT 20',
-      url: '#',
+      url: '/survey',
       icon: 'cui-pencil',
     },
     {
