@@ -16,7 +16,7 @@ import {
     Input,
     Row,
 } from 'reactstrap';
-
+import { Link } from 'react-router-dom';
 
 const items = [
     {
@@ -35,6 +35,8 @@ const items = [
         caption: 'Slide 3',
     },
 ];
+
+
 class Documents extends Component {
     constructor(props) {
         super(props);
@@ -45,43 +47,44 @@ class Documents extends Component {
         this.onExiting = this.onExiting.bind(this);
         this.onExited = this.onExited.bind(this);
     }
-
+    
     onExiting() {
         this.animating = true;
     }
-
+    
     onExited() {
         this.animating = false;
     }
-
+    
     next() {
         if (this.animating) return;
         const nextIndex = this.state.activeIndex === items.length - 1 ? 0 : this.state.activeIndex + 1;
         this.setState({ activeIndex: nextIndex });
     }
-
+    
     previous() {
         if (this.animating) return;
         const nextIndex = this.state.activeIndex === 0 ? items.length - 1 : this.state.activeIndex - 1;
         this.setState({ activeIndex: nextIndex });
     }
-
+    
     goToIndex(newIndex) {
         if (this.animating) return;
         this.setState({ activeIndex: newIndex });
     }
-
+    
     loading = () => <div className="animated fadeIn pt-1 text-center">Loading...</div>
-
+    
     render() {
         const { activeIndex } = this.state;
-
+        const uploadLink = `/uploadHocLieu`
+        
         const slides2 = items.map((item) => {
             return (
                 <CarouselItem
-                    onExiting={this.onExiting}
-                    onExited={this.onExited}
-                    key={item.src}
+                onExiting={this.onExiting}
+                onExited={this.onExited}
+                key={item.src}
                 >
                     <img className="d-block w-100" src={item.src} alt={item.altText} />
                     <CarouselCaption captionText={item.caption} captionHeader={item.caption} />
@@ -99,24 +102,20 @@ class Documents extends Component {
                             <Col lg="2" md="4" xs="12"  >
                                 <Row className="p-4 ">
                                     <Col lg="12" md="12" xs="12" >
-                                        <Button   block color="primary">Upload</Button>
+                                        <Link to={uploadLink}><Button block color="primary">Upload</Button></Link>
                                     </Col>
                                 </Row>
                                 <Row className="p-4 ">
                                     <Col lg="12" md="12" xs="12" >
                                         <Row className=" mt-3">
                                             <Col className="h5">
-                                                <a href="#">Toán <Badge color="primary" className="float-right sm">10</Badge></a>
-
+                                                Toán <Badge color="primary" className="float-right sm">10</Badge>
                                             </Col>
-
                                         </Row>
                                         <Row className=" mt-3">
                                             <Col className="h5">
-                                                <a href="#">Lý <Badge color="primary" className="float-right sm">5</Badge></a>
-
+                                                Lý <Badge color="primary" className="float-right sm">5</Badge>
                                             </Col>
-
                                         </Row>
                                     </Col>
                                 </Row>
