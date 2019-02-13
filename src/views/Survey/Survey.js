@@ -9,7 +9,8 @@ import {
   CardHeader,
   CardBody,
   Button,
-  Alert
+  Alert,
+  Collapse
 } from "reactstrap";
 import surveyQuestionsData from "./SurveyQuestionsData";
 import groupsQuestionData from "./GroupsQuestionData";
@@ -29,62 +30,87 @@ function QuestionGroupHeader(props) {
   );
 }
 
-function QuestionRow(props) {
-  const question = props.question;
-  return (
-    <tr key={question.id.toString()}>
-      <td className="text-left">
-        <Card>
-          <CardHeader>
-            <strong>
-              Tiêu chí {question.id + 1}: {question.name}
-            </strong>
-          </CardHeader>
-          <CardBody>
-            - <strong>Mức Đạt:</strong> {question.pass} <br />-{" "}
-            <strong>Mức Khá:</strong> {question.good} <br />-{" "}
-            <strong>Mức Tốt:</strong> {question.veryGood}
-          </CardBody>
-        </Card>
-      </td>
-      <td className="align-middle">
-        <CustomInput
-          type="radio"
-          id={question.id + "CD"}
-          name={question.id}
-          value="1"
-          onChange={props.onChange}
-        />
-      </td>
-      <td className="align-middle">
-        <CustomInput
-          type="radio"
-          id={question.id + "D"}
-          name={question.id}
-          value="2"
-          onChange={props.onChange}
-        />
-      </td>
-      <td className="align-middle">
-        <CustomInput
-          type="radio"
-          id={question.id + "K"}
-          name={question.id}
-          value="3"
-          onChange={props.onChange}
-        />
-      </td>
-      <td className="align-middle">
-        <CustomInput
-          type="radio"
-          id={question.id + "T"}
-          name={question.id}
-          value="4"
-          onChange={props.onChange}
-        />
-      </td>
-    </tr>
-  );
+class QuestionRow extends React.Component {
+  constructor(props) {
+    super(props);
+    this.toggle = this.toggle.bind(this);
+    this.state = {
+      collapse: false,
+      question: props.question
+    };
+  }
+
+  toggle() {
+    this.setState({ collapse: !this.state.collapse });
+  }
+
+  render() {
+    return (
+      <tr key={this.state.question.id.toString()}>
+        <td className="text-left">
+          <Card>
+            <CardHeader>
+              <strong>
+                Tiêu chí {this.state.question.id + 1}:{" "}
+                {this.state.question.name}
+              </strong>
+              <Button
+                color="link"
+                onClick={this.toggle}
+                className="float-right"
+                id={"toggleCollapse" + this.state.question.id}
+              >
+                Xem tiêu chí đánh giá
+              </Button>
+            </CardHeader>
+            <Collapse isOpen={this.state.collapse}>
+              <CardBody>
+                - <strong>Mức Đạt:</strong> {this.state.question.pass} <br />-{" "}
+                <strong>Mức Khá:</strong> {this.state.question.good} <br />-{" "}
+                <strong>Mức Tốt:</strong> {this.state.question.veryGood}
+              </CardBody>
+            </Collapse>
+          </Card>
+        </td>
+        <td className="align-middle">
+          <CustomInput
+            type="radio"
+            id={this.state.question.id + "CD"}
+            name={this.state.question.id}
+            value="1"
+            onChange={this.props.onChange}
+          />
+        </td>
+        <td className="align-middle">
+          <CustomInput
+            type="radio"
+            id={this.state.question.id + "D"}
+            name={this.state.question.id}
+            value="2"
+            onChange={this.props.onChange}
+          />
+        </td>
+        <td className="align-middle">
+          <CustomInput
+            type="radio"
+            id={this.state.question.id + "K"}
+            name={this.state.question.id}
+            value="3"
+            onChange={this.props.onChange}
+          />
+        </td>
+        <td className="align-middle">
+          <CustomInput
+            type="radio"
+            id={this.state.question.id + "T"}
+            name={this.state.question.id}
+            value="4"
+            onChange={this.props.onChange}
+          />
+        </td>
+      </tr>
+    );
+  }
 }
 
 const getAlertColor = result => {
@@ -100,13 +126,13 @@ const getAlertColor = result => {
 };
 
 class Survey extends Component {
-  constructor(){
+  constructor() {
     super();
 
     this.state = {
       questionResult: Array(15).fill(1),
       result: ""
-    }
+    };
   }
 
   handleChange(e) {
@@ -119,11 +145,11 @@ class Survey extends Component {
     });
   }
 
-  calculateResult(resultList){
+  calculateResult(resultList) {
     var i;
     var kha = 0;
     var tot = 0;
-    for (i = 0; i < resultList.length; i++){
+    for (i = 0; i < resultList.length; i++) {
       // eslint-disable-next-line
       if (resultList[i] == 1) return "Chưa đạt";
       // eslint-disable-next-line
@@ -136,7 +162,6 @@ class Survey extends Component {
     }
 
     if (kha + tot < 10) return "Đạt";
-
 
     if (tot >= 10) {
       // eslint-disable-next-line
@@ -170,10 +195,15 @@ class Survey extends Component {
                 <tbody>
                   {groupQuestionList.map((group, index) => [
                     <QuestionGroupHeader key={index} group={group} />,
-                    questionList.map((question, index) =>
-                      question.group === group.id && (
-                        <QuestionRow key={index} onChange={e => this.handleChange(e)} question={question} />
-                      )
+                    questionList.map(
+                      (question, index) =>
+                        question.group === group.id && (
+                          <QuestionRow
+                            key={index}
+                            onChange={e => this.handleChange(e)}
+                            question={question}
+                          />
+                        )
                     )
                   ])}
                   <tr>
