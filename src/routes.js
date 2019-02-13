@@ -42,7 +42,7 @@ const Users = React.lazy(() => import('./views/Users/Users'));
 const User = React.lazy(() => import('./views/Users/User'));
 const Survey = React.lazy(() => import('./views/Survey/Survey'));
 const Maintest = React.lazy(() => import('./views/MainTest/maintest'));
-const TraCuuVanBan = React.lazy(() => import('./views/traCuuVanBan/TraCuuVanBan'));
+const TraCuuVanBan = React.lazy(() => import('./views/traCuuVanBan/Tracuuvanban'));
 const ChiTietVanBan = React.lazy(() => import('./views/traCuuVanBan/detailVanBan/chiTietVanBan'));
 
 

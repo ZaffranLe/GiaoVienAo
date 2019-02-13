@@ -107,16 +107,13 @@ class Documents extends Component {
                                         <Row className=" mt-3">
                                             <Col className="h5">
                                                 <a href="#">Toán <Badge color="primary" className="float-right sm">10</Badge></a>
-
                                             </Col>
 
                                         </Row>
                                         <Row className=" mt-3">
                                             <Col className="h5">
                                                 <a href="#">Lý <Badge color="primary" className="float-right sm">5</Badge></a>
-
                                             </Col>
-
                                         </Row>
                                     </Col>
                                 </Row>
